@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#ff6fae">
+	<title>Sana küçük bir sürprizim var</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Pacifico&display=swap');
+
+		:root {
+			--pink: #ff6fae;
+			--deep-pink: #d83f80;
+			--hot-pink: #ff4f9a;
+			--blush: #fff1f7;
+			--ink: #5e2946;
+			--white: #fffafd;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			overflow-x: hidden;
+			color: var(--ink);
+			font-family: 'DM Sans', sans-serif;
+			background: #ffc4dd;
+			background-image: radial-gradient(circle at 12% 15%, rgba(255,255,255,.85) 0 5px, transparent 6px), radial-gradient(circle at 86% 28%, rgba(255,255,255,.55) 0 4px, transparent 5px), linear-gradient(135deg, #ffb5d4 0%, #ffd8e9 45%, #ffb8d5 100%);
+		}
+
+		body::before, body::after {
+			position: fixed;
+			z-index: -1;
+			content: '♡';
+			color: rgba(255,255,255,.5);
+			font-size: 13rem;
+			line-height: 1;
+			transform: rotate(-18deg);
+		}
+
+		body::before { top: -35px; left: -45px; }
+		body::after { right: -48px; bottom: -45px; transform: rotate(18deg); }
+
+		body.mortal-theme {
+			color: #f7e9df;
+			background: #130b0a;
+			background-image: radial-gradient(circle at 50% 120%, rgba(255,79,20,.45), transparent 38%), linear-gradient(135deg, #32110d 0%, #120b0b 52%, #050505 100%);
+		}
+
+		body.mortal-theme::before, body.mortal-theme::after { content: ''; opacity: 0; }
+		body.mortal-theme .gift-shell { border-color: rgba(255,118,54,.5); background: rgba(20,12,12,.82); box-shadow: 0 28px 80px rgba(255,67,18,.2), inset 0 1px rgba(255,151,85,.25); }
+		body.mortal-theme .gift-shell::before { content: '⚔  ·  ⚔'; color: #ff692d; }
+		body.mortal-theme .kitty { border-color: #e74622; background: #1c1110; box-shadow: 0 10px 0 rgba(255,74,24,.18); }
+		body.mortal-theme .kitty::before, body.mortal-theme .kitty::after { border-color: #e74622; background: #1c1110; }
+		body.mortal-theme .eye { background: #ff5b2e; box-shadow: 0 0 10px #ff3d13; }
+		body.mortal-theme .nose { background: #ff9b34; }
+		body.mortal-theme .whisker { background: #f3bba2; }
+		body.mortal-theme .bow, body.mortal-theme .bow::before { background: #9b1d17; }
+		body.mortal-theme .bow::after { background: #ff9b34; }
+		body.mortal-theme .eyebrow, body.mortal-theme .reveal-card h2 { color: #ff7040; }
+		body.mortal-theme h1 { color: #ff572d; font-family: Impact, 'Arial Narrow', sans-serif; font-size: clamp(2.3rem, 8vw, 6rem); letter-spacing: .06em; line-height: .98; text-shadow: 0 3px 0 #67150e, 0 0 24px rgba(255,64,20,.65); }
+		body.mortal-theme .intro { color: #f3cfc1; }
+		body.mortal-theme .gift-button { background: linear-gradient(135deg, #ff6a2e, #8f120d); box-shadow: 0 9px 22px rgba(255,69,19,.32); }
+		body.mortal-theme .reveal-card { border-color: rgba(255,91,42,.42); background: rgba(45,18,15,.84); }
+		body.mortal-theme .key-box { border-color: #e95d34; color: #ffb183; background: #210f0d; }
+		body.mortal-theme .copy-button { background: #a72018; }
+		body.mortal-theme .how-to { border-top-color: rgba(255,91,42,.3); }
+		body.mortal-theme .how-to h3, body.mortal-theme .how-to strong { color: #ff7040; }
+		body.mortal-theme .how-to li::before { background: #a72018; }
+		body.mortal-theme .hint, body.mortal-theme .footer { color: #d69783; }
+
+		.flame-overlay { position: fixed; inset: 0; z-index: 5; pointer-events: none; opacity: 0; background: radial-gradient(ellipse at 50% 110%, rgba(255,239,128,.95) 0 5%, rgba(255,101,24,.88) 17%, rgba(126,14,5,.72) 38%, transparent 68%); mix-blend-mode: screen; }
+		.flame-overlay.active { animation: flame-sweep 1.35s cubic-bezier(.3,.8,.3,1) both; }
+
+		@keyframes flame-sweep { 0% { opacity: 0; transform: scaleY(.25) translateY(80%); } 22% { opacity: 1; } 68% { opacity: .82; transform: scaleY(1.15) translateY(-4%); } 100% { opacity: 0; transform: scaleY(1.25) translateY(-20%); } }
+
+		.page { display: grid; min-height: 100vh; padding: 34px 20px; place-items: center; }
+
+		.gift-shell {
+			position: relative;
+			width: min(100%, 980px);
+			padding: clamp(28px, 6vw, 70px);
+			overflow: hidden;
+			border: 2px solid rgba(255,255,255,.72);
+			border-radius: 34px;
+			background: rgba(255,250,253,.67);
+			box-shadow: 0 28px 70px rgba(172,58,108,.18), inset 0 1px rgba(255,255,255,.95);
+			backdrop-filter: blur(10px);
+		}
+
+		.gift-shell::before { position: absolute; top: 20px; right: 30px; content: '✦  ·  ✦'; color: var(--hot-pink); font-size: 1.4rem; letter-spacing: 10px; animation: twinkle 2.6s ease-in-out infinite; }
+		.content { position: relative; z-index: 1; text-align: center; }
+		.eyebrow { display: inline-flex; gap: 8px; align-items: center; margin: 0 0 17px; color: var(--deep-pink); font-size: .76rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+
+		h1 { max-width: 620px; margin: 0 auto; color: var(--deep-pink); font-family: 'Pacifico', cursive; font-size: clamp(2.45rem, 8vw, 5.5rem); font-weight: 400; line-height: 1.1; text-shadow: 3px 4px 0 rgba(255,255,255,.7); }
+		.intro { max-width: 440px; margin: 22px auto 34px; font-size: clamp(1rem, 2vw, 1.12rem); line-height: 1.7; }
+
+		.kitty { position: relative; width: 144px; height: 122px; margin: 0 auto 24px; border: 4px solid var(--ink); border-radius: 48% 48% 45% 45%; background: var(--white); box-shadow: 0 10px 0 rgba(216,63,128,.12); animation: float 4s ease-in-out infinite; }
+		.kitty::before, .kitty::after { position: absolute; top: -28px; width: 55px; height: 51px; content: ''; border: 4px solid var(--ink); background: var(--white); z-index: -1; }
+		.kitty::before { left: 3px; border-radius: 78% 8% 15% 18%; transform: rotate(31deg); }
+		.kitty::after { right: 3px; border-radius: 8% 78% 18% 15%; transform: rotate(-31deg); }
+		.eye { position: absolute; top: 49px; width: 9px; height: 14px; border-radius: 50%; background: var(--ink); }
+		.eye.left { left: 34px; }
+		.eye.right { right: 34px; }
+		.nose { position: absolute; top: 65px; left: 50%; width: 12px; height: 9px; border-radius: 50%; background: #ffd02f; transform: translateX(-50%); }
+		.whisker { position: absolute; top: 67px; width: 31px; height: 1.5px; background: var(--ink); }
+		.whisker.left { left: -22px; transform: rotate(10deg); }
+		.whisker.right { right: -22px; transform: rotate(-10deg); }
+		.bow { position: absolute; top: -18px; right: -21px; width: 43px; height: 30px; border-radius: 50%; background: var(--hot-pink); transform: rotate(17deg); }
+		.bow::before { position: absolute; left: -22px; width: 43px; height: 30px; content: ''; border-radius: 50%; background: var(--hot-pink); }
+		.bow::after { position: absolute; top: 10px; left: 16px; width: 12px; height: 12px; content: ''; border-radius: 50%; background: #ffccdf; }
+
+		.gift-button { border: 0; border-radius: 999px; padding: 17px 30px; color: white; cursor: pointer; font: inherit; font-size: 1rem; font-weight: 700; background: linear-gradient(135deg, var(--hot-pink), var(--deep-pink)); box-shadow: 0 9px 18px rgba(216,63,128,.28); transition: transform .2s ease, box-shadow .2s ease; }
+		.gift-button:hover { transform: translateY(-3px); box-shadow: 0 13px 23px rgba(216,63,128,.34); }
+		.gift-button:focus-visible { outline: 4px solid rgba(255,79,154,.28); outline-offset: 4px; }
+
+		.reveal-card { display: none; max-width: 520px; margin: 32px auto 0; padding: 25px; border: 1px solid rgba(216,63,128,.18); border-radius: 22px; background: rgba(255,255,255,.76); animation: reveal .5s ease both; }
+		.reveal-card.visible { display: block; }
+		.reveal-card h2 { margin: 0 0 6px; color: var(--deep-pink); font-size: 1.35rem; }
+		.reveal-card p { margin: 0 0 17px; font-size: .92rem; }
+		.key-row { display: flex; gap: 8px; align-items: center; }
+		.key-box { min-width: 0; flex: 1; border: 1px dashed var(--pink); border-radius: 12px; padding: 13px 10px; color: var(--deep-pink); font-family: monospace; font-size: clamp(.8rem, 3vw, 1.08rem); font-weight: 700; letter-spacing: .04em; background: var(--blush); }
+		.copy-button { flex: 0 0 auto; border: 0; border-radius: 12px; padding: 14px 15px; color: white; cursor: pointer; font: inherit; font-weight: 700; background: var(--deep-pink); }
+		.hint { margin: 14px 0 0; color: #9c5577; font-size: .78rem; }
+		.how-to { margin-top: 25px; padding-top: 21px; border-top: 1px solid rgba(216,63,128,.18); text-align: left; }
+		.how-to h3 { margin: 0 0 14px; color: var(--deep-pink); font-size: 1rem; }
+		.how-to ol { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: steam-step; }
+		.how-to li { position: relative; padding-left: 35px; font-size: .87rem; line-height: 1.55; counter-increment: steam-step; }
+		.how-to li::before { position: absolute; top: 1px; left: 0; display: grid; width: 23px; height: 23px; content: counter(steam-step); border-radius: 50%; color: white; font-size: .75rem; font-weight: 700; background: var(--deep-pink); place-items: center; }
+		.how-to strong { color: var(--deep-pink); }
+		.footer { margin: 32px 0 0; color: #a55279; font-size: .78rem; }
+		.confetti { position: fixed; top: -20px; z-index: 4; width: 9px; height: 14px; pointer-events: none; animation: fall 2.3s linear forwards; }
+
+		@keyframes float { 50% { transform: translateY(-7px) rotate(2deg); } }
+		@keyframes twinkle { 50% { opacity: .35; transform: scale(.85) rotate(12deg); } }
+		@keyframes reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes fall { to { transform: translateY(110vh) rotate(650deg); opacity: 0; } }
+
+		@media (max-width: 520px) {
+			.page { padding: 16px 12px; }
+			.gift-shell { border-radius: 25px; padding: 38px 18px 27px; }
+			.gift-shell::before { top: 14px; right: 18px; font-size: 1rem; }
+			.intro { margin-bottom: 26px; }
+			.key-row { align-items: stretch; flex-direction: column; }
+			.copy-button { width: 100%; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="flame-overlay" id="flameOverlay" aria-hidden="true"></div>
+	<main class="page">
+		<section class="gift-shell" aria-labelledby="page-title">
+			<div class="content">
+				<div class="kitty" aria-label="Pembe fiyonklu sevimli kedi çizimi" role="img">
+					<span class="eye left"></span>
+					<span class="eye right"></span>
+					<span class="nose"></span>
+					<span class="whisker left"></span>
+					<span class="whisker right"></span>
+					<span class="bow"></span>
+				</div>
+				<p class="eyebrow">♡ sana özel bir not ♡</p>
+				<h1 id="page-title">Minik bir sürprizin var!</h1>
+				<p class="intro">Senin için seçtiğim bu hediyeyi açmadan önce kocaman bir gülümseme bırakıyorum. Hazırsan butona dokun! ♡</p>
+				<button class="gift-button" id="revealButton" type="button">Hediyeyi aç ✨</button>
+
+				<div class="reveal-card" id="revealCard" aria-live="polite">
+					<h2>Steam key'in burada! 🎀</h2>
+					<p>Oyunu Steam'de etkinleştirip keyfi sonuna kadar çıkar.</p>
+					<div class="key-row">
+						<code class="key-box" id="steamKey">298DG-MX9NR-GNGQ3</code>
+						<button class="copy-button" id="copyButton" type="button">Kopyala</button>
+					</div>
+					<p class="hint" id="copyHint">Key'i kullanırken gruplar arasındaki tireleri silme.</p>
+					<div class="how-to">
+						<h3>Steam CD Key Nasıl Kullanılır?</h3>
+						<ol>
+							<li><strong>Steam'a giriş yapın:</strong> Steam uygulamasını açın ve hesabınıza giriş yapın.</li>
+							<li><strong>Ürün etkinleştirme sayfasına gidin:</strong> Sol üst köşedeki <strong>Oyunlar</strong> menüsüne tıklayın ve <strong>Bir ürün Steam'de etkinleştir...</strong> seçeneğini seçin.</li>
+							<li><strong>CD Key'i girin:</strong> Yukarıdaki Steam CD Key'i girin. Kod onaylandıktan sonra Mortal Kombat 11 doğrudan kütüphanenize eklenecektir.</li>
+						</ol>
+					</div>
+				</div>
+				<p class="footer">senin için, sevgiyle hazırlandı ♡</p>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		const revealButton = document.querySelector('#revealButton');
+		const revealCard = document.querySelector('#revealCard');
+		const flameOverlay = document.querySelector('#flameOverlay');
+		const copyButton = document.querySelector('#copyButton');
+		const steamKey = document.querySelector('#steamKey');
+		const copyHint = document.querySelector('#copyHint');
+
+		function celebrate() {
+			const colors = ['#ff4f9a', '#ffd02f', '#ffffff', '#d83f80'];
+			for (let index = 0; index < 34; index += 1) {
+				const piece = document.createElement('span');
+				piece.className = 'confetti';
+				piece.style.left = `${Math.random() * 100}vw`;
+				piece.style.background = colors[index % colors.length];
+				piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+				piece.style.animationDelay = `${Math.random() * .35}s`;
+				document.body.append(piece);
+				window.setTimeout(() => piece.remove(), 2600);
+			}
+		}
+
+		revealButton.addEventListener('click', () => {
+			document.body.classList.add('mortal-theme');
+			flameOverlay.classList.add('active');
+			document.querySelector('#page-title').textContent = 'MORTAL KOMBAT 11';
+			document.querySelector('.eyebrow').textContent = '⚔ fatality seviyesinde bir hediye ⚔';
+			document.querySelector('.intro').textContent = 'Savaş başlasın! Bu Mortal Kombat 11 Steam key artık senin.';
+			document.querySelector('.reveal-card h2').textContent = 'MORTAL KOMBAT 11 KEY';
+			revealCard.classList.add('visible');
+			revealButton.textContent = 'FIGHT! 🔥';
+			revealButton.disabled = true;
+			revealButton.style.opacity = '.75';
+			celebrate();
+		});
+
+		copyButton.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(steamKey.textContent.trim());
+				copyButton.textContent = 'Kopyalandı ✓';
+				copyHint.textContent = "Key panoya kopyalandı. Şimdi Steam'e geçebilirsin!";
+			} catch (error) {
+				copyHint.textContent = 'Kopyalama kullanılamadı; key\'i seçip elle kopyalayabilirsin.';
+			}
+		});
+	</script>
+</body>
+</html>
